@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Items</title>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <style>
+        /* Root theme colors */
+        :root {
+            --color-bg: #3b2f2f;
+            /* dark dark brown */
+            --color-bg-light: rgba(59, 47, 47, 0.75);
+            --color-bg-glass: rgba(59, 47, 47, 0.5);
+            --color-primary: #b98b6d;
+            --color-primary-hover: #d4b393;
+            --color-text-primary: #efefef;
+            --color-text-secondary: #d7c1b3;
+            --color-card-bg: rgba(59, 47, 47, 0.8);
+            --color-shadow: rgba(0, 0, 0, 0.7);
+            --color-border: #6f5848;
+            --scrollbar-bg: #5a453b;
+            --scrollbar-thumb: #a2856c;
+        }
+
+        /* Reset and base */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background:
+                linear-gradient(rgba(57, 47, 47, 0.85), rgba(37, 28, 28, 0.85)),
+                url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b5e5afdf-6067-4662-9490-6ee060fe33d7.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #f5f3f1;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            /* background: rgba(62, 47, 28, 0.85); */
+            z-index: -1;
+        }
+
+        .heading {
+            text-align: center;
+            color: #b98b6d;
+        }
+
+        .heading:hover {
+            transform: scale(2.00);
+            box-shadow: 0 10px 30px rgba(217, 160, 102, 0.8);
+
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover,
+        a:focus {
+            color: var(--color-primary-hover);
+            outline: none;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: var(--scrollbar-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbar-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            height: 64px;
+            backdrop-filter: blur(24px);
+            background: var(--color-bg-glass);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px var(--color-shadow);
+        }
+
+        .brand {
+            font-size: clamp(2.25rem, 1.5vw, 1.5rem);
+            font-weight: 700;
+            color: var(--color-primary);
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            font-size: 38px;
+        }
+
+        /* Hamburger menu button for mobile */
+        #sidebarToggle {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            cursor: pointer;
+            display: none;
+            font-size: 32px;
+            user-select: none;
+        }
+
+        #sidebarToggle:focus-visible {
+            outline: 2px solid var(--color-primary-hover);
+            outline-offset: 2px;
+        }
+
+        /* Main container */
+        .app-container {
+            display: flex;
+            flex: 1 1 auto;
+            min-height: calc(100vh - 64px);
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        aside.sidebar {
+            width: 280px;
+            background: var(--color-bg-light);
+            backdrop-filter: blur(24px);
+            border-right: 1px solid var(--color-border);
+            padding-top: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 16px var(--color-shadow);
+        }
+
+        aside.sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0 24px 24px 24px;
+            flex: 1;
+        }
+
+        aside.sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            padding: 12px 16px;
+            border-radius: 12px;
+            user-select: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        aside.sidebar nav a .material-icons {
+            font-size: 28px;
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        aside.sidebar nav a:hover,
+        aside.sidebar nav a:focus-visible {
+            background: var(--color-primary-hover);
+            color: var(--color-bg);
+            outline: none;
+        }
+
+        aside.sidebar nav a[aria-current="page"] {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            cursor: default;
+        }
+
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 0px;
+            width: 100%;
+        }
+
+        .navbar {
+            /* background: rgba(62, 47, 28, 0.95) ; */
+            /* background: linear-gradient(90deg, #161370, #8784CF); */
+            /* margin-top: 10px; */
+            /* padding: 30px 0; */
+            height: 50px;
+            background: #3b2f2f;
+            /* position: sticky; */
+            top: 0;
+            /* z-index: 1000; */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        /*nav bar styling*/
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0px;
+            margin-left: 10px;
+        }
+
+        /*nav bar color,gap,radious of border*/
+        .navbar a {
+            font-size: 18px;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        /*nav bar hover with black color*/
+        .navbar a:hover,
+        .navbar a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+
+
+        /* Notification badge example */
+        aside.sidebar nav a .badge {
+            position: absolute;
+            right: 16px;
+            top: 14px;
+            background-color: #dc2626;
+            /* red-600 */
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 2px 8px;
+            user-select: none;
+        }
+
+        /* Sidebar slide out on mobile */
+        aside.sidebar.mobile-hidden {
+            transform: translateX(-100%);
+            box-shadow: none;
+            pointer-events: none;
+            position: fixed;
+            height: 100%;
+            z-index: 1200;
+            top: 64px;
+            left: 0;
+        }
+
+        aside.sidebar.mobile-visible {
+            transform: translateX(0);
+            pointer-events: auto;
+            box-shadow: 12px 0 48px var(--color-shadow);
+            position: fixed;
+            height: 100%;
+            top: 64px;
+            left: 0;
+            background: var(--color-bg-light);
+            backdrop-filter: blur(24px);
+            z-index: 1300;
+            transition: transform 0.3s ease;
+        }
+
+        /* Overlay behind sidebar */
+        #overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1100;
+        }
+
+        #overlay.visible {
+            display: block;
+        }
+
+        /* Main content */
+        main.content {
+            flex: 1 1 auto;
+            padding: 32px 48px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+        }
+
+        /* Section styling */
+        section.menu-section {
+            margin-bottom: 64px;
+        }
+
+        section.menu-section h2 {
+            font-size: clamp(1.8rem, 2vw, 2.4rem);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 24px;
+            border-left: 5px solid var(--color-primary);
+            padding-left: 12px;
+            user-select: none;
+        }
+
+        .btn {
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #d4b393);
+            color: #3e2f1c;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(217, 160, 102, 0.48);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(217, 160, 102, 0.8);
+            outline: none;
+        }
+
+        /* Grid of items */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px 36px;
+        }
+
+        /* Card styling for items */
+        .item-card {
+            background: var(--color-card-bg);
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.2, 1, 0.22, 1);
+            will-change: transform;
+            border: 1.5px solid transparent;
+        }
+
+        .item-card:focus-within,
+        .item-card:hover {
+            outline: none;
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 14px 36px rgba(185, 142, 109, 0.5);
+            border-color: var(--color-primary);
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .item-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-bottom: 1px solid var(--color-border);
+            transition: transform 0.4s ease;
+            will-change: transform;
+        }
+
+        .item-card:hover .item-image,
+        .item-card:focus-within .item-image {
+            transform: scale(1.07);
+        }
+
+        .item-info {
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--color-primary-hover);
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            flex-grow: 1;
+            margin-bottom: 12px;
+            user-select: none;
+        }
+
+        .item-price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            user-select: none;
+            align-self: flex-end;
+        }
+
+
+        /* Footer */
+        footer {
+            background: #3b2f2f;
+            color: #b98b6d;
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.9rem;
+            user-select: none;
+            margin-top: 48px;
+        }
+
+        footer a {
+            margin: 0 12px;
+            font-weight: 700;
+            color: #b98b6d;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover,
+        footer a:focus {
+            color: #f3e9dc;
+            outline: none;
+        }
+
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #b98b6d;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            fill: #b98b6d;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #b98b6d;
+            border-radius: 50%;
+            color: #532f11;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #532f11;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive adjustments */
+
+        /* Mobile (≤ 640px) */
+        @media (max-width: 640px) {
+            #sidebarToggle {
+                display: block;
+            }
+
+            aside.sidebar {
+                position: fixed;
+                top: 64px;
+                left: 0;
+                height: calc(10vh - 64px);
+                z-index: 1200;
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: none;
+                pointer-events: none;
+            }
+
+            aside.sidebar.mobile-visible {
+                pointer-events: auto;
+                transform: translateX(0);
+                box-shadow: 12px 0 48px var(--color-shadow);
+            }
+
+            main.content {
+                padding: 24px 16px 48px 16px;
+            }
+        }
+
+        /* Tablet (641px - 1023px) */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .app-container {
+                flex-direction: row;
+            }
+
+            aside.sidebar {
+                width: 220px;
+                flex-shrink: 0;
+                position: relative;
+                transform: none !important;
+                height: auto;
+                box-shadow: none;
+            }
+
+            main.content {
+                padding: 32px 32px;
+            }
+        }
+
+        /* Desktop (≥1024px) */
+        @media (min-width: 1024px) {
+            main.content {
+                padding: 48px 64px;
+            }
+        }
+
+        /* Micro-interactions and animation helper */
+        @media (prefers-reduced-motion: no-preference) {
+            .item-card {
+                transition: transform 0.3s cubic-bezier(0.2, 1, 0.22, 1), box-shadow 0.3s ease;
+            }
+
+            .item-card:hover,
+            .item-card:focus-within {
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            #sidebarToggle {
+                transition: color 0.3s ease;
+            }
+
+            #sidebarToggle:hover,
+            #sidebarToggle:focus {
+                color: var(--color-primary-hover);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar {
+        height: 60px; /* Adjust height for smaller screens */
+    }
+
+    .navbar a {
+        font-size: 16px; /* Decrease font size */
+        padding: 6px 12px; /* Adjust padding */
+    }
+
+    .brand {
+        font-size: 30px; /* Decrease brand font size */
+        height: 80px; /* Adjust height */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem; /* Decrease hero title size */
+    }
+
+    .menu-section h2 {
+        font-size: 2.5rem; /* Decrease menu section title size */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column; /* Stack navbar items vertically */
+        align-items: center; /* Center items */
+        height: auto; /* Allow height to adjust */
+    }
+
+    .navbar a {
+        font-size: 14px; /* Further decrease font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .brand {
+        font-size: 40px; /* Further decrease brand font size */
+        height: 60px; /* Adjust height */
+    }
+
+    .hero-content h1 {
+        font-size: 2rem; /* Further decrease hero title size */
+    }
+
+    .menu-section h2 {
+        font-size: 2rem; /* Further decrease menu section title size */
+    }
+
+    .btn {
+        padding: 10px 20px; /* Adjust button padding */
+        font-size: 0.9rem; /* Decrease button font size */
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <header role="banner">
+        <button id="sidebarToggle" aria-label="Toggle navigation menu" aria-expanded="false"
+            aria-controls="sidebarMenu">
+            <span class="material-icons">menu</span>
+        </button>
+        <div class="brand" aria-label="Restaurant brand name">
+            <span class="material-icons brand-icon" aria-hidden="true">restaurant_menu</span>
+            <span>Salt'n Pepper restaurant</span>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="about_us.html">About</a></li>
+            <li><a href="contact_us.html">Contact</a></li>
+            <li><a href="items.html">Items</a></li>
+            <li><a href="review.html">Reviews</a></li>
+        </ul>
+
+    </nav>
+
+
+    <div class="heading">
+        <h1>𝐅𝐨𝐨𝐝 𝐈𝐭𝐞𝐦𝐬</h1>
+    </div>
+
+    <div class="app-container">
+        <aside id="sidebarMenu" class="sidebar mobile-hidden" role="navigation" aria-label="Primary menu">
+            <nav>
+                <a href="#juice-section" aria-current="page"><span class="material-icons">local_drink</span>Juices</a>
+                <a href="#coffee-section"><span class="material-icons">coffee</span>Coffee</a>
+                <a href="#snacks-section"><span class="material-icons">fastfood</span>Snacks</a>
+                <a href="#icecream"><span class="material-icons">icecream</span>Icecreams</a>
+                <a href="#non-veg/veg"><span class="material-icons">egg</span>Non-Veg / Veg</a>
+
+            </nav>
+        </aside>
+
+        <div id="overlay" tabindex="-1"></div>
+
+        <main class="content" role="main" tabindex="-1">
+            <!-- Juice Section -->
+            <section id="juice-section" class="menu-section" aria-labelledby="juice-title">
+                <h2 id="juice-title">🍹Juices & Shakes Varieties</h2>
+                <div class="items-grid">
+                    <article class="item-card" tabindex="0" aria-label="Fresh Orange Juice, $4.50">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/12566972-5494-4b78-884b-77867ef73150.png"
+                            alt="juice" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Fresh Orange Juice</h3>
+                            <p class="item-desc">Cold pressed orange juice, refreshing and full of vitamin C.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 50 cents">$4.50</div> -->
+                        </div>
+                    </article>
+                    <article class="item-card" tabindex="0" aria-label="Mango Pineapple Juice, $5.00">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/038a92be-b111-46bd-b11e-5a87ddc9b974.png"
+                            alt="juice"
+                            loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Mango Pineapple Juice</h3>
+                            <p class="item-desc">A tropical blend of mango and pineapple juice with a smooth finish.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars">$5.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Refreshing Watermelon Juice, $4.75">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/07fa07c3-84a7-4080-93e9-71942382e84e.png"
+                            alt="juice" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Refreshing Watermelon Juice</h3>
+                            <p class="item-desc">Freshly blended watermelon juice with a hint of mint.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 75 cents">$4.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5911f052-849c-489a-a41f-8a09b22ada68.png"
+                            alt="juice" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Carrot Ginger Juice</h3>
+                            <p class="item-desc">A spicy and healthy carrot juice with a ginger kick.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.dButuwNcB6wq8TFRMPoruwAAAA?w=130&h=196&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="juice"
+                            loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Grapes Juice</h3>
+                            <p class="item-desc"> healthy alternative to sugary beverages, like soda.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.lGG0FHlptIdlMz9xK7stIQHaHx?w=181&h=189&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="juice" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Apple Juice</h3>
+                            <p class="item-desc">provides hydration and some nutrients, it lacks the fiber of whole
+                                apples and contains high sugar levels</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP._gBlJ64m7Gpq_2N00fdfWAHaGA?w=186&h=151&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="shake" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Banana Shake</h3>
+                            <p class="item-desc">Banana shake can aid weight loss if prepared with low-calorie,
+                                metabolism-boosting ingredients</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.RETk4JLFw6XjnMJ09HT1twHaLH?pid=ImgDet&w=197&h=295&c=7&dpr=1.3&cb=idpwebp2&o=7&rm=3"
+                            alt="shake" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Strawberry Shake</h3>
+                            <p class="item-desc">The strawberries are as natural as they get – they’re picked off the
+                                bush. And you can grow them yourself easily, and freeze for the off-season</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.AdODXCBGji36BDIudXA6vAHaKw?w=620&h=900&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+                            alt="shake" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Chocolate Shake</h3>
+                            <p class="item-desc">Chocolate milkshakes are considered one of the most common comfort
+                                drinks, reminds us of our lazy childhood summer days</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP._yjzKTgcqT2zsulWAqWBJAHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="shake" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Oreo Shake</h3>
+                            <p class="item-desc">Honestly, this has quickly become one of my favorite dessert recipes to
+                                make with Oreos</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.jLG_XAWGNNS3Iy0U7oJDjwHaIK?w=165&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="juice" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Lemon Juice</h3>
+                            <p class="item-desc">Give your immune system a boost. Vitamin C is like our immune system’s
+                                jumper cables</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.nYUgjvUq302uYwSxw-UPEgHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="shake" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Blueberry Shake</h3>
+                            <p class="item-desc">refreshingly delicious and wonderfully healthy blueberry smoothies </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Coffee Section -->
+            <section id="coffee-section" class="menu-section" aria-labelledby="coffee-title">
+                <h2 id="coffee-title">🧋Coffee Varieties</h2>
+                <div class="items-grid">
+                    <article class="item-card" tabindex="0" aria-label="Espresso, $3.00">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1503de75-fa14-4c59-8c9b-585b7b50a724.png"
+                            alt="coffee" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Espresso</h3>
+                            <p class="item-desc">Strong and bold shot of espresso with a rich aroma.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars">$3.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Cappuccino, $3.75">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/887e0c2b-3fde-44bb-82cc-0b69cd1ce4e2.png"
+                            alt="coffee" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Cappuccino</h3>
+                            <p class="item-desc">cappuccino is the perfect balance of espresso, steamed milk and foam
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 75 cents">$3.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Cappuccino, $3.75">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.FET9R-tNJB3qPVjAcpyIDwHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="Ccoffee" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Vanilla Coffee</h3>
+                            <p class="item-desc">Vanilla has delicate, warm, sweet, and creamy flavor notes which makes
+                                it the perfect addition </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 75 cents">$3.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Cappuccino, $3.75">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.nM4P21ZH9PyVp8AfxaM52AHaE8?w=296&h=197&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="coffee"
+                            loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Mocha Coffee</h3>
+                            <p class="item-desc">Mocha coffee offers a unique and indulgent flavor experience that
+                                combines the best of both coffee and chocolate worlds</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 75 cents">$3.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Cappuccino, $3.75">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.WOy8PFoNow2aDpYSQCSB7gHaE3?w=186&h=122&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="coffee"
+                            loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Caramel Coffee</h3>
+                            <p class="item-desc">Caramel coffee is a delightful blend of rich coffee and sweet caramel.
+                                This combination creates a warm, inviting drink that many love</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 75 cents">$3.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Cappuccino, $3.75">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.XHpDE42XQJQdAyahVlURNQHaLH?w=204&h=306&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="coffee" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Cold Coffee</h3>
+                            <p class="item-desc">cold coffee can help increase the feeling of fullness, potentially
+                                aiding appetite control</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 75 cents">$3.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Latte, $4.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.CXMtexjwPX0JXa1i3NYWXQHaLH?w=118&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="coffee" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Latte</h3>
+                            <p class="item-desc">Latte, one of the most popular coffee beverages worldwide. latte is a
+                                combination of espresso and textured milk</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars">$4.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Iced Mocha, $4.50">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0c926d1d-6200-4bd4-b3b4-55d6fc30bf0f.png"
+                            alt="coffee" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Iced Mocha</h3>
+                            <p class="item-desc">Iced mocha coffee is a delightful and refreshing beverage that combines
+                                the rich flavors of coffee and chocolate</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 50 cents">$4.50</div> -->
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Snacks Section -->
+            <section id="snacks-section" class="menu-section" aria-labelledby="snacks-title">
+                <h2 id="snacks-title">🍔Snacks Varieties</h2>
+                <div class="items-grid">
+                    <article class="item-card" tabindex="0" aria-label="Crispy French Fries, $3.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.Li8pxx1mH1MnM7LYG83SeAHaHa?w=179&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Fried Chicken</h3>
+                            <p class="item-desc">Fried chicken can be a part of a balanced diet, especially if you opt
+                                for healthier preparation methods. Using less oil, choosing leaner cuts of chicken, and
+                                incorporating whole grains and vegetables alongside your fried chicken can help mitigate
+                                the potential downsides</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 50 cents">$3.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Crispy French Fries, $3.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.q6T-eiNaBjxmJyrnxHuQdAHaFi?w=193&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Burger</h3>
+                            <p class="item-desc">burgers have captured the hearts and taste buds of people around the
+                                world</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <!-- <br>
+                            <div class="item-price" aria-label="Price 3 dollars 50 cents">$3.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Crispy French Fries, $3.50">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/46b0efb1-d0ce-42bb-bbc2-b37d6aa9cd7c.png"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Crispy French Fries</h3>
+                            <p class="item-desc">crispness contrasts beautifully with the soft, pillowy interior that
+                                melts in your mouth</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 50 cents">$3.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Crispy French Fries, $3.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.Fn88uuSDOOsWak9uR_-bRQHaJf?w=186&h=239&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"  alt="snacks" loading="lazy"/>
+                        <div class="item-info">
+                            <h3 class="item-name">Veggie Sandwitch</h3>
+                            <p class="item-desc">the recipe starts with a wrap, pita or slices of bread, these
+                                sandwiches pile on lots of delicious veggies for a fresh and satisfying bite</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 50 cents">$3.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Crispy French Fries, $3.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.PtlF31OgG4Fw1BYfeJTJhQHaJ3?w=141&h=188&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Grilled Sandwitch</h3>
+                            <p class="item-desc">grill sandwich is a culinary masterpiece that combines the flavors of
+                                hearty bread, savory fillings, and melted cheese, all seared to perfection on a grill
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 50 cents">$3.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Crispy French Fries, $3.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.l6grewbrePlh6hlt4X31VAHaE8?w=262&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Wraps</h3>
+                            <p class="item-desc">A wrap is a tasty snack that typically involves a flatbread or tortilla
+                                enveloping various fillings. Common types of bread used for wraps</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 3 dollars 50 cents">$3.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Loaded Nachos, $6.00">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0ee87727-f9ff-4e88-8548-792b351cc538.png"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Loaded Nachos</h3>
+                            <p class="item-desc">Loaded nachos are more than just a snack—they’re a meal in themselves.
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 6 dollars">$6.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Veggie Spring Rolls, $5.50">
+                        <img class="item-image"
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/123cfb57-0d1c-473d-8419-e0227ec1db74.png"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Veggie Spring Rolls</h3>
+                            <p class="item-desc">Thai spring rolls are often filled with a mixture of vegetables, glass
+                                noodles, and tofu, and are served with a sweet chili sauce.
+                                For a healthier option, vegetable spring rolls can be baked in the oven instead of
+                                fried.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 50 cents">$5.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Spicy Chicken Wings, $7.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.7t_U3qvvqEdSmEV4yEfWqgHaEK?w=268&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Momos</h3>
+                            <p class="item-desc"> Momos are filled with juicy stuffing and served with a spicy momo
+                                chutney and some dips. They are cheap, tasty, and available in almost every metropolitan
+                                city in India</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 7 dollars">$7.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Spicy 
+          Chicken Wings, $7.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.6KruoBbAJP0mNYtwF6_23gHaEK?w=320&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">cheese corn roll</h3>
+                            <p class="item-desc">You can also have spring rolls as a starter. The basic spring roll is
+                                stuffed with cauliflower and garlic.The cheese and corn spring rolls can be a great
+                                snack for the evening
+
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 7 dollars">$7.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Spicy 
+          Chicken Wings, $7.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.lHdr4cj5fN4ZXIr4sn5x7AHaEo?w=235&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Pizza</h3>
+                            <p class="item-desc">Pizza is a worldwide favorite. The reason for pizza spread is that you
+                                can add anything to it and eat it anytime of the day and anywhere.
+
+
+                                The pizza originated in Italy and it is one of the favorite foods for adults and
+                                children.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 7 dollars">$7.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Spicy 
+          Chicken Wings, $7.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.4plk0NVAGyA3SVUynuSifwHaLH?w=141&h=211&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Manchurian</h3>
+                            <p class="item-desc">Manchurian, one of the most beloved dishes in Indo-Chinese cuisine, is
+                                a flavorful fusion of Chinese cooking techniques with Indian spices and ingredients</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 7 dollars">$7.00</div> -->
+                        </div>
+                    </article>
+
+
+                    <article class="item-card" tabindex="0" aria-label="Spicy 
+          Chicken Wings, $7.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.B8z3cnFD4WHTp4iaSjs-LwHaLH?w=117&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Noodle</h3>
+                            <p class="item-desc">Many people enjoy customizing their noodle dishes with a variety of
+                                ingredients, such as vegetables, meats, and sauces, allowing for endless creativity in
+                                the kitchen</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 7 dollars">$7.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Iced Mocha, $4.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.k0i85gV_NtV3GSr1RS61MgHaEK?w=305&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="snacks" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Masala Dosa</h3>
+                            <p class="item-desc">Masala dosa is a popular South Indian dish that combines flavor,
+                                texture, and cultural significance.Masala dosa features a crispy, golden-brown crepe
+                                made from fermented rice and lentil batter, filled with a spiced potato mixture.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 50 cents">$4.50</div> -->
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- icecream Section -->
+            <section id="icecream" class="menu-section" aria-labelledby="juice-title">
+                <h2 id="juice-title">
+                    🍨Icecream Varieties</h2>
+                <div class="items-grid">
+                    <article class="item-card" tabindex="0" aria-label="Fresh Orange Juice, $4.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.GCc6rRPRuFLL0wXogNuFCwHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Mint Chocolate Chip</h3>
+                            <p class="item-desc">The mint flavor provides a refreshing and cooling sensation that is
+                                complemented by the sweetness of the chocolate</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 50 cents">$4.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Mango Pineapple Juice, $5.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.mkC2oc1ka5XktHAt1M03iwHaJ4?w=159&h=212&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream"
+                            loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Vanilla</h3>
+                            <p class="item-desc">Vanilla ice cream excels in its ability to pair with a wide variety of
+                                foods and toppings, enhancing the flavor of anything it accompanies</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars">$5.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Refreshing Watermelon Juice, $4.75">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.tmOCnIxaJ_qmB3ogDiYrqAHaHM?w=186&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Mango</h3>
+                            <p class="item-desc">Choose ripe mangoes for optimal flavor. Overripe mangoes also work well
+                                as they are sweeter and have a stronger taste.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 75 cents">$4.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.vIW5RxrJl2soX5YLJo2HTgHaLH?w=125&h=187&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Blueberry</h3>
+                            <p class="item-desc">The blueberries bring a vibrant pop of color and natural sweetness that
+                                makes this ice cream so refreshing. It’s like eating a scoop of summer in every bite</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.m0PbICOr0IQmNCcwO2Ny3AHaLH?w=139&h=209&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Chocolate</h3>
+                            <p class="item-desc"> most ice creams use milk, this one uses a mixture of milk and heavy
+                                cream. It’s got a richer flavor, and the richness makes it perfect for dessert.
+                                Chocolate ice cream is great because you can make it to almost any taste</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.bn8hF89Fxaroy3iP9zHbpgHaHa?w=186&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Coconut</h3>
+                            <p class="item-desc">Coconut ice cream is the perfect treat for anyone who craves a rich,
+                                creamy dessert with a tropical twist.
+
+                                Whether you’re a fan of the classic coconut flavor or you’re looking to explore exciting
+                                new variations, there’s something undeniably delightful about coconut ice cream.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.D2-Hl7zuqcX6ExfYoNEcngHaHa?w=186&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Stawberry</h3>
+                            <p class="item-desc">Strawberry ice cream is a creamy and refreshing dessert made from ripe
+                                strawberries, fresh cream, and sugar. It is characterized by its naturally sweet and
+                                tangy flavor, paired with a vibrant pink hue</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image" src="https://static.toiimg.com/photo/84014919.cms"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Butterscotch</h3>
+                            <p class="item-desc">A butterscotch ice cream recipe that completely combines the flavor of
+                                butterscotch throughout the ice cream directly adds the butterscotch ingredients to the
+                                ice cream ingredients before it is frozen</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.-fPlBBDUEw237xZKR_CqLQHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Brownie</h3>
+                            <p class="item-desc">Brownie and ice cream together create a perfect balance of warm and
+                                cold, fudgy and creamy, rich and refreshing—a pairing that has stood the test of time
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.AMmRhSGeBf7uc4beYdAAjwHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Berries and cream</h3>
+                            <p class="item-desc">Berry and Cream Ice Cream is a delightful frozen treat that combines
+                                the lusciousness of fresh berries with the creaminess of homemade ice cream. Bursting
+                                with the vibrant flavors of ripe berries and the richness of cream</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://sugarpursuit.com/wp-content/uploads/2023/07/Peanut-butter-ice-cream-thumbnail.jpg"
+                            alt="icecream" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">peanut Butter</h3>
+                            <p class="item-desc">Peanut butter is a type of spread made from peanuts. It is high in fat
+                                and calories but is a good source of protein and vitamins.
+
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+
+            <!-- non-veg/veg section-->
+            <section id="non-veg/veg" class="menu-section" aria-labelledby="juice-title">
+                <h2 id="juice-title">🍲Food Varieties</h2>
+                <div class="items-grid">
+                    <article class="item-card" tabindex="0" aria-label="Fresh Orange Juice, $4.50">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.Vjw4yJSpw3yeD_2RhCLZpgHaEK?w=282&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Veg Dum Biryani</h3>
+                            <p class="item-desc">This Veg Dum Biryani recipe is an authentic Indian vegetarian dish
+                                packed full of your favorite rice, veggies, and spices</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 50 cents">$4.50</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Mango Pineapple Juice, $5.00">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.yHMOkKWPFk89DOH-AgqchQHaHa?w=193&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course"
+                            loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Rajma Masala</h3>
+                            <p class="item-desc">Rajma Masala is a delicious gravy made by cooking red kidney beans with
+                                onion, tomatoes and basic spices. Rajma Masala goes well with roti, chapati & rice and a
+                                good choice of gravy when we run out of veggies</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars">$5.00</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Refreshing Watermelon Juice, $4.75">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.HynS5fN62hPkjx8JQJHkDwHaEP?w=311&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Chole Masala</h3>
+                            <p class="item-desc">Chole masala is a blend of select spices used in the preparation of
+                                chick peas or kabuli chana. The spices included in chole masala may vary from family to
+                                family, brand to brand, but it typically contains bay leaf, mustard seeds, cumin,
+                                coriander seeds, cloves, red chillies, peppercorn, and anaardana (pomegranate seeds).
+                            </p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 4 dollars 75 cents">$4.75</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.-KDRLD1e0JIAdrcnTAwydwHaE7?w=290&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Paneer Butter Masala</h3>
+                            <p class="item-desc">Paneer Butter Masala, also known as butter paneer is a rich & creamy
+                                curry made with paneer, spices, onions, tomatoes, cashews and butter</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.na1znZVjuk2QoWFh-SvQ5QHaHa?w=186&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Kadhi Pakora</h3>
+                            <p class="item-desc">Kadhi pakora is a comforting curry made with spiced gram flour and
+                                yoghurt, paired with soft pakoras simmered in a tangy, creamy sauce</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.6AXhOlCQsJ2Ob68n4bYjfgHaE7?w=285&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Dal Makhani</h3>
+                            <p class="item-desc">Dal Makhani is a rich, creamy and popular Punjabi dish made with
+                                slow-cooked black lentils (urad dal) and kidney beans (rajma), simmered with butter,
+                                cream and aromatic spices, creating a luscious, smoky-flavored delicacy best enjoyed
+                                with roti, paratha or rice</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.TT-qwTBMxI_1uZCeWyjDUwHaE7?w=289&h=192&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Paalak Paneer</h3>
+                            <p class="item-desc">Palak Paneer is a classic Indian dish that combines tender spinach
+                                leaves with creamy paneer (Indian cottage cheese) in a flavorful and aromatic gravy</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.LuKqf3GGdNsFtDKL336ocwHaHa?w=183&h=183&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Veg Pulao</h3>
+                            <p class="item-desc">Veg Pulao, or Vegetable Pulav Rice, is a delightful one-pot Indian dish
+                                that combines aromatic basmati rice with a medley of colorful vegetables and spices.
+                                It's a versatile and flavorful meal suitable for various occasions, offering both
+                                nutrition and taste in every bite.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.vS1JBAsupliEu8teITTsZQHaEJ?w=331&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Butter Chiken</h3>
+                            <p class="item-desc">Butter Chicken, also known as Murgh Makhani, is a beloved Indian dish
+                                that features tender chicken pieces cooked in a rich, creamy tomato-based curry sauce.
+                                This dish is a staple in Indian cuisine and is cherished for its flavorful and aromatic
+                                profile</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.-X83FoaHpd4K_yjShg_LYQHaEK?w=284&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Chicken Pulao</h3>
+                            <p class="item-desc">It is a fragrant rice dish. Basmati rice, chicken, and aromatic spices
+                                come together in harmony. Unlike biryani, which demands layers and laborious
+                                slow-cooking, pulao is an efficient, no-fuss meal. Think of it as biryani’s relaxed
+                                cousin—less dramatic, but just as delicious</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.2LkA-wDs8RCIpDoQ7C4Z2AHaDy?w=348&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">simple Roti</h3>
+                            <p class="item-desc">Roti is called Flatbread in English is a type of unleavened bread made
+                                from whole wheat flour, widely consumed in South Asia. It is a dietary staple. Roti is
+                                low in fat, high in fiber and provides a healthy source of energy, making it ideal for
+                                balanced meals. It is a nutritious choice.</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+
+                    <article class="item-card" tabindex="0" aria-label="Carrot Ginger Juice, $5.25">
+                        <img class="item-image"
+                            src="https://th.bing.com/th/id/OIP.QkpVPMpyBnNhI6NdhG4kzwHaHa?w=193&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                            alt="main course" loading="lazy" />
+                        <div class="item-info">
+                            <h3 class="item-name">Butternaan,simple naan</h3>
+                            <p class="item-desc">This easy and authentic butter naan recipe yields soft and delicious
+                                Homemade Naan (aka Indian Flat bread). Finally, you can make restaurant-quality naan in
+                                the comfort of your own home!</p>
+                            <br>
+                            <button class="btn" aria-label="Explore Our Menu">Add</button>
+                            <br>
+                            <!-- <div class="item-price" aria-label="Price 5 dollars 25 cents">$5.25</div> -->
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+
+
+        </main>
+    </div>
+  
+    <footer id="contact" role="contentinfo" aria-label="Site Footer">
+        <p>Contact us at <a href="mailto:info@Salt'nPepperrestaurant">Salt'n Pepper restaurant</a> | Call: +92 311 1101047</p>
+
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    <span>Address :103-b Ii, Mm Alam Road, Lahore, Punjab Province 54000
+                       </span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                    <span> Phone No. +92 311 1101047,</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    <span> Email: info@Salt'nPepperrestaurant.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                        <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                    </svg>
+                    <span>Monday-sunday: 10:00AM-10:00PM</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/TheSaltnPepperRestaurants/" class="social-link">f</a>
+                <a href="https://x.com/snprestaurant" class="social-link">t</a>
+                <a href="https://www.instagram.com/saltnpepperrestaurants/" class="social-link">in</a>
+                <!-- <a href="#" class="social-link">yt</a> -->
+            </div>
+        </div>
+
+
+        <p>© 2025 Salt'n Pepper restaurant. All rights reserved.</p>
+    </footer>
+    <script>
+        (() => {
+            const sidebar = document.getElementById('sidebarMenu');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const overlay = document.getElementById('overlay');
+
+            // Toggle sidebar for mobile
+            function toggleSidebar() {
+                const expanded = sidebarToggle.getAttribute('aria-expanded') === 'true';
+                if (expanded) {
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
+                    sidebar.classList.remove('mobile-visible');
+                    sidebar.classList.add('mobile-hidden');
+                    overlay.classList.remove('visible');
+                    document.body.style.overflow = '';
+                } else {
+                    sidebarToggle.setAttribute('aria-expanded', 'true');
+                    sidebar.classList.remove('mobile-hidden');
+                    sidebar.classList.add('mobile-visible');
+                    overlay.classList.add('visible');
+                    document.body.style.overflow = 'hidden';
+                    sidebar.focus();
+                }
+            }
+
+            sidebarToggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+
+            // Accessibility: Close sidebar with Escape key
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && sidebar.classList.contains('mobile-visible')) {
+                    toggleSidebar();
+                    sidebarToggle.focus();
+                }
+            });
+
+            // Trap focus inside sidebar when open on mobile
+            sidebar.addEventListener('keydown', e => {
+                if (e.key === 'Tab' && sidebar.classList.contains('mobile-visible')) {
+                    const focusableElements = sidebar.querySelectorAll('a, button');
+                    const firstEl = focusableElements[0];
+                    const lastEl = focusableElements[focusableElements.length - 1];
+                    if (!e.shiftKey && document.activeElement === lastEl) {
+                        e.preventDefault();
+                        firstEl.focus();
+                    }
+                    if (e.shiftKey && document.activeElement === firstEl) {
+                        e.preventDefault();
+                        lastEl.focus();
+                    }
+                }
+            });
+
+            // Skip link to main content
+            function skipToMain(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    document.querySelector('main.content').focus();
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

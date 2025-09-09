@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+    <style>
+        /* Root theme colors */
+        :root {
+            --color-bg: #3b2f2f;
+            /* dark dark brown */
+            --color-bg-light: rgba(59, 47, 47, 0.75);
+            --color-bg-glass: rgba(59, 47, 47, 0.5);
+            --color-primary: #b98b6d;
+            --color-primary-hover: #d4b393;
+            --color-text-primary: #efefef;
+            --color-text-secondary: #d7c1b3;
+            --color-card-bg: rgba(59, 47, 47, 0.8);
+            --color-shadow: rgba(0, 0, 0, 0.7);
+            --color-border: #6f5848;
+            --scrollbar-bg: #5a453b;
+            --scrollbar-thumb: #a2856c;
+        }
+
+        /* Reset and base */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background:
+                linear-gradient(rgba(57, 47, 47, 0.85), rgba(37, 28, 28, 0.85)),
+                url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b5e5afdf-6067-4662-9490-6ee060fe33d7.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #f5f3f1;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            /* background: rgba(62, 47, 28, 0.85); */
+            z-index: -1;
+        }
+
+        .heading {
+            text-align: center;
+            color: #b98b6d;
+        }
+
+        .heading:hover {
+            transform: scale(2.00);
+            box-shadow: 0 10px 30px rgba(217, 160, 102, 0.8);
+
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover,
+        a:focus {
+            color: var(--color-primary-hover);
+            outline: none;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: var(--scrollbar-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbar-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            height: 64px;
+            backdrop-filter: blur(24px);
+            background: var(--color-bg-glass);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px var(--color-shadow);
+        }
+
+        .brand {
+            font-size: clamp(2.25rem, 1.5vw, 1.5rem);
+            font-weight: 700px;
+            color: var(--color-primary);
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            font-size: 38px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 0px;
+            width: 100%;
+        }
+
+        .navbar {
+            /* background: rgba(62, 47, 28, 0.95) ; */
+            /* background: linear-gradient(90deg, #161370, #8784CF); */
+            /* margin-top: 10px; */
+            /* padding: 30px 0; */
+            height: 50px;
+            background: #3b2f2f;
+            /* position: sticky; */
+            top: 0;
+            /* z-index: 1000; */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        /*nav bar styling*/
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0px;
+            margin-left: 0px;
+        }
+
+        /*nav bar color,gap,radious of border*/
+        .navbar a {
+            font-size: 18px;
+            padding: 8px 16px;
+            border-radius: 10px;
+        }
+
+        /*nav bar hover with black color*/
+        .navbar a:hover,
+        .navbar a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            flex: 1;
+            max-width: 960px;
+            margin: 48px auto 80px;
+            padding: 20px 24px;
+            background: rgba(255 255 255 / 0.07);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 0.9s ease forwards;
+        }
+
+        main:hover,
+        main:focus {
+            transform: scale(1.05);
+            box-shadow: 0 14px 50px rgba(216, 176, 140, 0.85);
+            outline: none;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 36px;
+            color: #d8b08c;
+            text-align: center;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+        }
+
+        /* Highlighted Review */
+        .highlighted-review {
+            padding: 28px 24px;
+            border: 3px solid #d8b08c;
+            border-radius: 24px;
+            background: rgba(216, 176, 140, 0.12);
+            margin-bottom: 48px;
+            box-shadow: 0 10px 30px rgba(216, 176, 140, 0.6);
+            user-select: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .highlighted-review:hover,
+        .highlighted-review:focus-within {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 48px rgba(216, 176, 140, 0.8);
+            outline: none;
+        }
+
+        .highlighted-review .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .highlighted-review .reviewer img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.5);
+        }
+
+        .highlighted-review .reviewer-name {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: #f0d8a8;
+        }
+
+        .highlighted-review .review-date {
+            color: #c9b79b;
+            font-size: 0.9rem;
+        }
+
+        .highlighted-review .star-rating {
+            color: #d8b08c;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .highlighted-review .review-text {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #f5f3f1;
+        }
+
+        /* Filters */
+        .filters {
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            background: transparent;
+            border: 2px solid #d8b08c;
+            border-radius: 12px;
+            color: #d8b08c;
+            padding: 10px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+
+        .filter-button.active,
+        .filter-button:hover,
+        .filter-button:focus {
+            background-color: #d8b08c;
+            color: #3b2f2f;
+            outline: none;
+            transform: scale(1.05);
+        }
+
+        /* Reviews grid */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        /* Review card */
+        .review-card {
+            background: rgba(255 255 255 / 0.1);
+            border-radius: 16px;
+            padding: 22px 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            outline-offset: 4px;
+        }
+
+        .review-card:hover,
+        .review-card:focus-within {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 22px 48px rgba(216, 176, 140, 0.75);
+            outline: none;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .reviewer img {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .reviewer img:hover,
+        .reviewer img:focus {
+            transform: scale(1.1);
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #f0d8a8;
+            user-select: none;
+        }
+
+        .review-date {
+            font-size: 0.85rem;
+            color: #c9b79b;
+            user-select: none;
+        }
+
+        .star-rating {
+            color: #d8b08c;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        .star-rating .material-icons {
+            vertical-align: middle;
+            transition: color 0.3s ease;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: #e6d7c2;
+            line-height: 1.4;
+        }
+
+        /* Animate stars on parent hover */
+        .review-card:hover .star-rating .material-icons,
+        .review-card:focus-within .star-rating .material-icons {
+            animation: shine 1.3s ease forwards;
+        }
+
+        /* Shine animation on stars */
+        @keyframes shine {
+            0% {
+                color: #d8b08c;
+                filter: drop-shadow(0 0 0px #d8b08c);
+            }
+
+            50% {
+                color: #f0d8a8;
+                filter: drop-shadow(0 0 6px #f0d8a8);
+            }
+
+            100% {
+                color: #d8b08c;
+                filter: drop-shadow(0 0 0px #d8b08c);
+            }
+        }
+
+        /* Emoji reactions */
+        .reactions {
+            margin-top: auto;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .reaction-button {
+            border: none;
+            background: transparent;
+            color: #d8b08c;
+            cursor: pointer;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            user-select: none;
+        }
+
+        .reaction-button:hover,
+        .reaction-button:focus {
+            color: #f0d8a8;
+            outline: none;
+            transform: scale(1.2);
+        }
+
+        .reaction-button:active {
+            transform: scale(1.1);
+        }
+
+        .reaction-count {
+            font-weight: 700;
+            font-size: 1rem;
+            color: inherit;
+        }
+
+        /* Review form */
+        .review-form-section {
+            margin-top: 56px;
+            background: rgba(216, 176, 140, 0.15);
+            border-radius: 18px;
+            padding: 36px 32px;
+            box-shadow: 0 12px 40px rgba(216, 176, 140, 0.3);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .review-form-section h2 {
+            color: #3b2f2f;
+            margin-bottom: 24px;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            user-select: none;
+        }
+
+        .review-form {
+            display: grid;
+            gap: 22px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: 600;
+            color: #3b2f2f;
+            display: block;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 2px solid #aa8a5d;
+            font-size: 1rem;
+            outline-offset: 3px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #3b2f2f;
+            box-shadow: 0 0 10px #aa8a5d;
+        }
+
+        button[type="submit"] {
+            background: #3b2f2f;
+            color: #d8b08c;
+            font-weight: 700;
+            cursor: pointer;
+            border: 3px solid #d8b08c;
+            font-size: 1.2rem;
+            padding: 14px 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 18px rgba(216, 176, 140, 0.6);
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+        }
+
+        button[type="submit"]:hover,
+        button[type="submit"]:focus {
+            background: #d8b08c;
+            color: #3b2f2f;
+            transform: scale(1.05);
+            box-shadow: 0 12px 28px rgba(216, 176, 140, 1);
+            outline: none;
+        }
+
+        /* ---------footer ----------*/
+        footer {
+            background: #3b2f2f;
+            color: #b98b6d;
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.9rem;
+            user-select: none;
+            margin-top: 48px;
+        }
+
+        footer a {
+            margin: 0 12px;
+            font-weight: 700;
+            color: #b98b6d;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover,
+        footer a:focus {
+            color: #f3e9dc;
+            outline: none;
+        }
+
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #b98b6d;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            fill: #b98b6d;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #d9a066cc;
+            border-radius: 50%;
+            color: #532f11;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #532f11;
+            transform: translateY(-3px);
+        }
+
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            nav {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            nav li {
+                font-size: 1rem;
+            }
+
+            main {
+                margin: 32px 16px 60px;
+                padding: 20px 12px;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .reviewer img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .review-form-section {
+                padding: 24px 20px;
+            }
+
+            .review-form {
+                width: 100%;
+                gap: 18px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+                
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar {
+        height: 60px; /* Adjust height for smaller screens */
+    }
+
+    .navbar a {
+        font-size: 16px; /* Decrease font size */
+        padding: 6px 12px; /* Adjust padding */
+    }
+
+    .brand {
+        font-size: 30px; /* Decrease brand font size */
+        height: 80px; /* Adjust height */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem; /* Decrease hero title size */
+    }
+
+    .menu-section h2 {
+        font-size: 2.5rem; /* Decrease menu section title size */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column; /* Stack navbar items vertically */
+        align-items: center; /* Center items */
+        height: auto; /* Allow height to adjust */
+    }
+
+    .navbar a {
+        font-size: 14px; /* Further decrease font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .brand {
+        font-size: 40px; /* Further decrease brand font size */
+        height: 60px; /* Adjust height */
+    }
+
+    .hero-content h1 {
+        font-size: 2rem; /* Further decrease hero title size */
+    }
+
+    .menu-section h2 {
+        font-size: 2rem; /* Further decrease menu section title size */
+    }
+
+    .btn {
+        padding: 10px 20px; /* Adjust button padding */
+        font-size: 0.9rem; /* Decrease button font size */
+    }
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand" aria-label="Restaurant brand name">
+            <span class="material-icons brand-icon" aria-hidden="true">restaurant_menu</span>
+            <span>Salt'n Pepper restaurant</span>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="about_us.html">About</a></li>
+            <li><a href="contact_us.html">Contact</a></li>
+            <li><a href="items.html">Items</a></li>
+            <li><a href="review.html">Reviews</a></li>
+        </ul>
+
+    </nav>
+    <main>
+        <h1 id="reviews-title">What Our Customers Say</h1>
+
+        <section class="highlighted-review" aria-label="Review of the Month">
+            <!-- <div class="reviewer">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7e152ab0-8e2a-4dcd-a5e3-ce114a705628.png"
+                    alt="Photo of reviewer John Doe" />
+                <div>
+                    <div class="reviewer-name">John Doe</div>
+                    <div class="review-date">April 2, 2025</div>
+                </div>
+            </div>
+            <div class="star-rating" aria-label="5 out of 5 stars">
+                <span class="material-icons" aria-hidden="true">star</span>
+                <span class="material-icons" aria-hidden="true">star</span>
+                <span class="material-icons" aria-hidden="true">star</span>
+                <span class="material-icons" aria-hidden="true">star</span>
+                <span class="material-icons" aria-hidden="true">star</span>
+            </div>
+            <p class="review-text">Delicious Bites is my absolute favorite restaurant! The atmosphere is cozy and the
+                food spectacular. Every visit feels like a celebration.</p>
+         -->
+
+            <article class="review-card" tabindex="0">
+                <div class="reviewer">
+                    <img src="https://placehold.co/56x56/da8c7a/fff?text=AB" alt="Avatar of Alice Brown" />
+                    <div>
+                        <div class="reviewer-name">Rohit Chaudhary</div>
+                        <div class="review-date">March 12, 2025</div>
+                    </div>
+                </div>
+                <div class="star-rating" aria-label="5 out of 5 stars">
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                </div>
+                <p class="review-text">The ambiance and food quality at Salt'n Pepper restaurant are unmatched. The staff is warm
+                    and always attentive. Highly recommend their signature dishes!</p>
+            </article>
+
+            <article class="review-card" tabindex="0">
+                <div class="reviewer">
+                    <img src="https://placehold.co/56x56/8c9adb/fff?text=JM" alt="Avatar of John Miller" />
+                    <div>
+                        <div class="reviewer-name">Alisha Bansal</div>
+                        <div class="review-date">February 25, 2025</div>
+                    </div>
+                </div>
+                <div class="star-rating" aria-label="4 out of 5 stars">
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true" style="color:#444;">star_border</span>
+                </div>
+                <p class="review-text">Salt'n Pepper restaurant has a great variety on the menu with fresh ingredients. Loved the
+                    cozy feel and friendly service.</p>
+            </article>
+
+            <article class="review-card" tabindex="0">
+                <div class="reviewer">
+                    <img src="https://placehold.co/56x56/a88c7d/fff?text=MC" alt="Avatar of Maria Clark" />
+                    <div>
+                        <div class="reviewer-name">Manu rathore</div>
+                        <div class="review-date">January 10, 2025</div>
+                    </div>
+                </div>
+                <div class="star-rating" aria-label="5 out of 5 stars">
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                </div>
+                <p class="review-text">Exceptional dining experience! The desserts are heavenly and the main courses are
+                    carefully crafted to perfection.</p>
+            </article>
+
+            <article class="review-card" tabindex="0">
+                <div class="reviewer">
+                    <img src="https://placehold.co/56x56/bba18d/fff?text=RS" alt="Avatar of Robert Smith" />
+                    <div>
+                        <div class="reviewer-name">Monika Sharma</div>
+                        <div class="review-date">December 5, 2024</div>
+                    </div>
+                </div>
+                <div class="star-rating" aria-label="4 out of 5 stars">
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true" style="color:#444;">star_border</span>
+                </div>
+                <p class="review-text">Lovely restaurant with a warm vibe. The coffee selection is top-notch, and every
+                    dish is flavorful and satisfying.</p>
+            </article>
+
+
+            <article class="review-card" tabindex="0">
+                <div class="reviewer">
+                    <img src="https://placehold.co/56x56/cba98c/fff?text=ES" alt="Avatar of Emily Stone" />
+                    <div>
+                        <div class="reviewer-name">Abhishek Verma</div>
+                        <div class="review-date">November 20, 2024</div>
+                    </div>
+                </div>
+                <div class="star-rating" aria-label="5 out of 5 stars">
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="material-icons" aria-hidden="true">star</span>
+                </div>
+                <p class="review-text">They offered a complimentary dessert for a birthday.</p>
+            </article>
+
+        </section>
+
+        <section class="filters" role="region" aria-label="Filter reviews by rating">
+            <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">All
+                Ratings</button>
+            <button type="button" class="filter-button" data-filter="5" aria-pressed="false">5 Stars</button>
+            <button type="button" class="filter-button" data-filter="4" aria-pressed="false">4 Stars</button>
+            <button type="button" class="filter-button" data-filter="3" aria-pressed="false">3 Stars</button>
+        </section>
+
+        <section class="reviews-grid" aria-live="polite" aria-label="Customer reviews"></section>
+
+        <section class="review-form-section" aria-labelledby="form-title">
+            <h2 id="form-title">Leave Your Review</h2>
+            <form id="review-form" class="review-form" novalidate autocomplete="off" aria-describedby="form-desc">
+                <p id="form-desc" class="sr-only">Fill out all fields and submit to leave your review.</p>
+
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter Your Full Name" required aria-required="true" />
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Your Email" required
+                    aria-required="true" />
+
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating" required aria-required="true">
+                    <option value="" disabled selected>Select rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+
+                <label for="comment">Your Feedback</label>
+                <textarea id="comment" name="comment" placeholder="Write your review here…" rows="5" required
+                    aria-required="true"></textarea>
+
+                <button type="submit">Submit Review</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- ---------------- footer---------------->
+   <footer id="contact" role="contentinfo" aria-label="Site Footer">
+        <p>Contact us at <a href="mailto:info@Salt'nPepperrestaurant">Salt'n Pepper restaurant</a> | Call: +92 311 1101047</p>
+
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    <span>Address :103-b Ii, Mm Alam Road, Lahore, Punjab Province 54000
+                       </span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                    <span> Phone No. +92 311 1101047,</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    <span> Email: info@Salt'nPepperrestaurant.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                        <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                    </svg>
+                    <span>Monday-sunday: 10:00AM-10:00PM</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/TheSaltnPepperRestaurants/" class="social-link">f</a>
+                <a href="https://x.com/snprestaurant" class="social-link">t</a>
+                <a href="https://www.instagram.com/saltnpepperrestaurants/" class="social-link">in</a>
+                <!-- <a href="#" class="social-link">yt</a> -->
+            </div>
+        </div>
+
+
+        <p>© 2025 Salt'n Pepper restaurant. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const reviewsData = [
+            {
+                id: 1,
+                name: "Alice Brown",
+                avatar: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bf3fe7bc-2af2-4c77-97e3-9396b3a2f697.png",
+                date: "March 12, 2025",
+                rating: 5,
+                text: "The ambiance and food quality at Delicious Bites are unmatched. The staff is warm and always attentive. Highly recommend their signature dishes!",
+                reactions: { helpful: 12, loved: 8, funny: 1 }
+            },
+            {
+                id: 2,
+                name: "John Miller",
+                avatar: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce7867dd-18e4-45a6-accf-ea17e0e3bc53.png",
+                date: "February 25, 2025",
+                rating: 4,
+                text: "Delicious Bites has a great variety on the menu with fresh ingredients. Loved the cozy feel and friendly service.",
+                reactions: { helpful: 9, loved: 6, funny: 0 }
+            },
+            {
+                id: 3,
+                name: "Maria Clark",
+                avatar: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bb1329bd-f34f-4c14-912f-5683b813bd1b.png",
+                date: "January 10, 2025",
+                rating: 5,
+                text: "Exceptional dining experience! The desserts are heavenly and the main courses are carefully crafted to perfection.",
+                reactions: { helpful: 15, loved: 12, funny: 3 }
+            },
+            {
+                id: 4,
+                name: "Robert Smith",
+                avatar: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2a5845f1-bac4-415a-8d63-079a84775d29.png",
+                date: "December 5, 2024",
+                rating: 4,
+                text: "Lovely restaurant with a warm vibe. The coffee selection is top-notch, and every dish is flavorful and satisfying.",
+                reactions: { helpful: 7, loved: 4, funny: 2 }
+            },
+        ];
+
+        const container = document.querySelector('.reviews-grid');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const form = document.getElementById('review-form');
+
+        function createStars(rating) {
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) starsHtml += '<span class="material-icons" aria-hidden="true">star</span>';
+                else starsHtml += '<span class="material-icons" aria-hidden="true" style="color:#444;">star_border</span>';
+            }
+            return starsHtml;
+        }
+
+        function renderReview(review) {
+            const article = document.createElement('article');
+            article.className = 'review-card';
+            article.setAttribute('tabindex', '0');
+            article.setAttribute('data-rating', review.rating);
+
+            article.innerHTML = `
+      <div class="reviewer">
+        <img src="${review.avatar}" alt="Avatar of ${review.name}"/>
+        <div>
+          <div class="reviewer-name">${review.name}</div>
+          <div class="review-date">${review.date}</div>
+        </div>
+      </div>
+      <div class="star-rating" aria-label="${review.rating} out of 5 stars">${createStars(review.rating)}</div>
+      <p class="review-text">${review.text}</p>
+      <div class="reactions" role="group" aria-label="Reactions">
+        <button type="button" class="reaction-button" aria-pressed="false" data-id="${review.id}" data-reaction="helpful" title="Helpful">
+          <span class="material-icons">thumb_up</span> <span class="reaction-count">${review.reactions.helpful}</span>
+        </button>
+        <button type="button" class="reaction-button" aria-pressed="false" data-id="${review.id}" data-reaction="loved" title="Loved it">
+          <span class="material-icons">favorite</span> <span class="reaction-count">${review.reactions.loved}</span>
+        </button>
+        <button type="button" class="reaction-button" aria-pressed="false" data-id="${review.id}" data-reaction="funny" title="Funny">
+          <span class="material-icons">sentiment_very_satisfied</span> <span class="reaction-count">${review.reactions.funny}</span>
+        </button>
+      </div>
+    `;
+            return article;
+        }
+
+        function renderReviews(filter = 'all') {
+            container.innerHTML = '';
+            let filtered = reviewsData;
+            if (filter !== 'all') {
+                const numFilter = Number(filter);
+                filtered = reviewsData.filter((r) => r.rating === numFilter);
+            }
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#d8b08c; user-select:none;">No reviews found for this rating.</p>';
+                return;
+            }
+            filtered.forEach(r => container.appendChild(renderReview(r)));
+        }
+
+        // Initialize page with all reviews
+        renderReviews();
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+                renderReviews(btn.dataset.filter);
+            });
+        });
+
+        // Reaction buttons event delegation
+        container.addEventListener('click', e => {
+            const btn = e.target.closest('.reaction-button');
+            if (!btn) return;
+            const id = Number(btn.dataset.id);
+            const reaction = btn.dataset.reaction;
+            const review = reviewsData.find(r => r.id === id);
+            if (!review) return;
+
+            // Toggle reaction count in UI & data (simulate toggle on/off)
+            const isPressed = btn.getAttribute('aria-pressed') === 'true';
+
+            btn.setAttribute('aria-pressed', (!isPressed).toString());
+            const countSpan = btn.querySelector('.reaction-count');
+            if (!isPressed) {
+                review.reactions[reaction]++;
+                countSpan.textContent = review.reactions[reaction];
+                btn.style.color = '#f0d8a8';
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 200);
+            } else {
+                review.reactions[reaction]--;
+                countSpan.textContent = review.reactions[reaction];
+                btn.style.color = '#d8b08c';
+            }
+        });
+
+        // Review form submission simulation
+        form.addEventListener('submit', (e)=> {
+            e.preventDefault();
+        })
+            // Simple validation
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const rating = form.rating.value;
+            const comment = form.comment.value.trim();
+            if (!name || !email || !rating){
+
+            }
+       

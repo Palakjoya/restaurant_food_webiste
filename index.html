@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Salt'n Pepper restaurant</title>
+
+
+
+
+    <!-- -------------------------------- -->
+
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+    <!-- --------------------------------- -->
+
+
+
+
+    <style>
+        /* Reset and base */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .brand {
+            height: 100px;
+            text-align: center;
+            color: #d9a066;
+            /* color:#B98B6D; */
+            font-size: 70px;
+        }
+
+        .material-icons {
+            font-size: 70px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background:
+                linear-gradient(rgba(57, 47, 47, 0.85), rgba(37, 28, 28, 0.85)),
+                url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b5e5afdf-6067-4662-9490-6ee060fe33d7.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #f5f3f1;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            /* background: rgba(62, 47, 28, 0.85); */
+            z-index: -1;
+        }
+
+        a {
+            color: #d9a066;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover,
+        a:focus {
+            color: #f3e9dc;
+            outline: none;
+        }
+
+        /* header {
+        height:100px;
+      background: rgba(62, 47, 28, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    } */
+        .container {
+            width: min(1200px, 90vw);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 0px;
+            width: 100%;
+        }
+
+        .navbar {
+            /* background: rgba(62, 47, 28, 0.95) ; */
+            /* background: linear-gradient(90deg, #161370, #8784CF); */
+            /* margin-top: 10px; */
+            /* padding: 30px 0; */
+            height: 50px;
+            background: #3b2f2f;
+            /* position: sticky; */
+            top: 0;
+            /* z-index: 1000; */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        /*nav bar styling*/
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0px;
+            margin-left: 10px;
+        }
+
+        /*nav bar color,gap,radious of border*/
+        .navbar a {
+            font-size: 18px;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        /*nav bar hover with black color*/
+        .navbar a:hover,
+        .navbar a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        nav li {
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        nav li::after {
+            content: "";
+            display: block;
+            height: 2px;
+            width: 0;
+            background: #d9a066;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        nav li:hover::after,
+        nav li:focus-within::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+            color: #f3e9dc;
+        }
+
+        .hero-content {
+            background: #3b2f2f;
+            padding: 48px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+            max-width: 700px;
+            animation: fadeInUp 1s ease forwards;
+            width: 2000px;
+            height: 400px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #d9a066, #f3e9dc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(217, 160, 102, 0.8);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+            color: #d9a066dd;
+        }
+
+        .btn {
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #d9a066, #f3e9dc);
+            color: #3e2f1c;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(217, 160, 102, 0.48);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(217, 160, 102, 0.8);
+            outline: none;
+        }
+
+        /* Food Menu Section */
+        .menu-section {
+            background: #3b2f2f;
+            padding: 72px 24px;
+            text-align: center;
+            color: #f3e9dc;
+        }
+
+        .menu-section h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            letter-spacing: 1.8px;
+            background: linear-gradient(135deg, #d9a066, #f3e9dc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 36px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 12px;
+        }
+
+        /* .menu-card {
+            background: #3b2f2f;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 420px;
+        } */
+
+        /* .menu-card:hover,
+        .menu-card:focus-within {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 16px 36px rgba(217, 160, 102, 0.9);
+            outline: none;
+        } */
+
+        .menu-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            border-radius: 20px;
+        }
+
+        .menu-card:hover .menu-img {
+            transform: scale(1.2);
+        }
+
+        /* .menu-content {
+            padding: 0px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        } */
+
+        .menu-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f3e9dc;
+        }
+
+        .menu-desc {
+            flex-grow: 1;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: #d9a066dd;
+        }
+
+       /* .menu-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #d9a066;
+            align-self: flex-start;
+        }*/
+
+        /* Footer */
+        footer {
+            background: #3b2f2f;
+            color: #b98b6d;
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.9rem;
+            user-select: none;
+            margin-top: 48px;
+        }
+
+        footer a {
+            margin: 0 12px;
+            font-weight: 700;
+            color: #b98b6d;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover,
+        footer a:focus {
+            color: #f3e9dc;
+            outline: none;
+        }
+
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #b98b6d;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            fill: #b98b6d;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #d9a066cc;
+            border-radius: 50%;
+            color: #532f11;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #532f11;
+            transform: translateY(-3px);
+        }
+
+
+
+
+        /* Animations */
+         @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            .btn {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+        } 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar {
+        height: 50px; /* Adjust height for smaller screens */
+    }
+
+    .navbar a {
+        font-size: 16px; /* Decrease font size */
+        padding: 6px 12px; /* Adjust padding */
+    }
+
+    .brand {
+        font-size: 30px; /* Decrease brand font size */
+        height: 90px; /* Adjust height */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem; /* Decrease hero title size */
+    }
+
+    .menu-section h2 {
+        font-size: 2.5rem; /* Decrease menu section title size */
+    }
+}
+
+
+@media (max-width: 400px) {
+    .navbar {
+        flex-direction: row; /* Stack navbar items vertically */
+        align-items: center; /* Center items */
+        height: auto; /* Allow height to adjust */
+    }
+
+    .navbar a {
+        font-size: 14px; /* Further decrease font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .brand {
+        font-size: 30px; /* Further decrease brand font size */
+        height: 60px; /* Adjust height */
+    }
+
+    .hero-content h1 {
+        font-size: 2rem; /* Further decrease hero title size */
+    }
+
+    .menu-section h2 {
+        font-size: 2rem; /* Further decrease menu section title size */
+    }
+
+    .btn {
+        padding: 10px 20px; /* Adjust button padding */
+        font-size: 0.9rem; /* Decrease button font size */
+    }
+
+}
+
+
+@media (max-width: 399px) {
+    .navbar {
+        padding: 10px;
+        flex-direction: row; /* Stack navbar items vertically */
+        align-items: center; /* Center items */
+        height: auto; /* Allow height to adjust */
+    }
+
+    .navbar a {
+        font-size: 20px; /* Further decrease font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .brand {
+        padding-top: 0px;
+        font-size: 23px; /* Further decrease brand font size */
+        height: 90px; /* Adjust height */
+    }
+ .brand-icon{
+ font-size: 40px;
+ }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- ---------- --------------------->
+
+    <div class="brand" aria-label="Restaurant brand name">
+        <span class="material-icons brand-icon" aria-hidden="true">restaurant_menu</span>
+        <span class="heading">Salt'n Pepper restaurant</span>
+    </div>
+    <!-- --------------------------------- -->
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="about_us.html">About</a></li>
+            <li><a href="contact_us.html">Contact</a></li>
+            <li><a href="items.html">Items</a></li>
+            <li><a href="review.html">Reviews</a></li>
+        </ul>
+
+    </nav>
+
+    <section class="hero" id="hero" role="region" aria-label="Hero Section">
+        <div class="hero-content">
+            <h1>Salt'n Pepper restaurant</h1>
+            <p>Fresh brews, tasty snacks, and cozy vibes </p>
+            <a href="items.html">
+            <button class="btn" aria-label="Explore Our Menu">Explore Our Menu</button>
+            </a>
+        </div>
+    </section>
+
+    <section class="menu-section" id="menu" role="region" aria-label="Cafe Menu">
+        <h2>Best Offers</h2>
+        <div class="menu-grid">
+
+            <article class="menu-card" tabindex="0" aria-label="Coffee Latte">
+                <img class="menu-img"
+                    src="https://img.freepik.com/premium-vector/fast-food-burger-pizza-best-combo-offer-social-media-banner-post-design-template_591663-52.jpg?w=2000"
+                    alt="Close-up image of a creamy coffee latte in a ceramic cup with latte art on top"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Burger offer</h3>
+                    <!-- <p class="menu-desc">Smooth espresso combined with creamy steamed milk, a perfect pick-me-up during
+                        long study
+                        hours.</p> -->
+                        
+                          <!-- <div class="menu-price">₹150</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Chocolate Chip Muffin">
+                <img class="menu-img"
+                    src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/combo-pizza-offer-design-template-2d9e4dab09d67b538e4bc7a0621997d7_screen.jpg?ts=1682038677"
+                    alt="Delicious chocolate chip muffin with melting chocolate chips and a soft crumb texture"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Pizza offer</h3>
+                    <!-- <p class="menu-desc">Freshly baked muffin with rich chocolate chips to satisfy your sweet cravings.
+                    </p> -->
+                    <!-- <div class="menu-price">₹150</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Avocado Toast">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.9qMi_fBpWoI6sNgl7HM39wAAAA?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Ice Creams offer</h3>
+                    <!-- <p class="menu-desc">Cold Brew is also what it sounds like: coffee that's brewed cold. </p> -->
+                    <!-- <div class="menu-price">₹200</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Iced Mocha">
+                <img class="menu-img"
+                    src="https://www.bdtask.com/blog/assets/plugins/ckfinder/core/connector/php/uploads/images/categorize-your-food-combo.jpg"
+                    alt="Tall iced mocha glass with chocolate drizzle, whipped cream, and ice cubes on a wooden table"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Family Packages</h3>
+                    <!-- <p class="menu-desc">Rich chocolate and espresso blended with ice and topped with whipped cream —
+                        cool and
+                        caffeinated.</p> -->
+                    <!-- <div class="menu-price">₹200</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Blueberry Scone">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.lOIjHXNO1nFlwM5wpbFXLQHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                    alt="Golden baked blueberry scone with blueberries peeking through the flaky crust"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Combo offer</h3>
+                    <!-- <p class="menu-desc">Delightful buttery scone loaded with fresh blueberries — ideal with a cup of
+                        tea.</p> -->
+                    <!-- <div class="menu-price">₹150</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.EAm8uFjPLThThIhLtYAK6wHaJl?w=186&h=241&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                    alt="Vibrant green matcha latte served in ceramic mug with latte art on top" loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Drinks offer</h3>
+                    <!-- <p class="menu-desc">Fine matcha tea mixed with steamed milk for a smooth, antioxidant-rich caffeine
+                        boost.
+                    </p> -->
+                    <!-- <div class="menu-price">₹250</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img" src="https://kitchenmai.com/wp-content/uploads/2019/03/rasgullasf-880x1024.jpg"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Sweets offer</h3>
+                    <!-- <p class="menu-desc">There’s something incredibly satisfying about biting into a soft, sweet donut.
+                        Whether
+                        it’s a classic glazed or a decadent cream-filled variety, donuts have a way of making any moment
+                        feel
+                        special.</p> -->
+                    <!-- <div class="menu-price">₹150</div> -->
+                </div>
+            </article>
+
+
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.6_2BibQ8ZEXFdHQENtGYiwHaGN?w=216&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                    loading="lazy" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Special Noodle offer</h3>
+                    <!-- <p class="menu-desc">you can omit the grilling to make this more like a basic veggie sandwich</p> -->
+                    <!-- <div class="menu-price">₹250</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.ABOu5zLkliPmCJnkOqOy1AHaE2?w=277&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Pizza Combo</h3>
+                    <!-- <p class="menu-desc">You are a passionate and thoughtful individual. Maybe you’re choosing veggies
+                        for
+                        personal health reasons, the protection of the planet, or both</p> -->
+                    <!-- <div class="menu-price">₹350</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.OfZFYpxORoIRetHf48djCwHaE8?w=260&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Best offer</h3>
+                    <!-- <p class="menu-desc">It doesn’t matter if it’s your first date, catching up with an old
+                        acquaintance, or
+                        making new friends, burgers are the preferable food item on every table</p> -->
+                    <!-- <div class="menu-price">₹150</div> -->
+                </div>
+            </article>
+
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img"
+                    src="https://mir-s3-cdn-cf.behance.net/projects/404/559d99178127421.64e3156721c0c.png" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Ice Creams offer</h3>
+                    <!-- <p class="menu-desc"> French fries, side dish or snack typically made from deep-fried potatoes ,the
+                        pieces are
+                        dried and typically fried in a deep fryer</p> -->
+                    <!-- <div class="menu-price">₹150</div> -->
+                </div>
+            </article>
+
+            <article class="menu-card" tabindex="0" aria-label="Matcha Latte">
+                <img class="menu-img"
+                    src="https://th.bing.com/th/id/OIP.LcMkxkqLhhjrqBQcGb0zgQAAAA?pid=ImgDet&w=197&h=197&c=7&dpr=1.3&cb=idpwebp2&o=7&rm=3" />
+                <div class="menu-content">
+                    <h3 class="menu-title">Coffee Offer</h3>
+                    <!-- <p class="menu-desc"> A good way to spend your life is by starting a soft drink company that
+                        satisfies the
+                        thirst of others</p> -->
+                    <!-- <div class="menu-price">₹60</div>
+                </div> -->
+            </article>
+
+        </div>
+    </section>
+
+    <footer id="contact" role="contentinfo" aria-label="Site Footer">
+        <p>Contact us at <a href="mailto:info@Salt'nPepperrestaurant">Salt'n Pepper restaurant</a> | Call: +92 311 1101047</p>
+
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    <span>Address :103-b Ii, Mm Alam Road, Lahore, Punjab Province 54000
+                       </span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                    <span> Phone No. +92 311 1101047,</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    <span> Email: info@Salt'nPepperrestaurant.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                        <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                    </svg>
+                    <span>Monday-sunday: 10:00AM-10:00PM</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/TheSaltnPepperRestaurants/" class="social-link">f</a>
+                <a href="https://x.com/snprestaurant" class="social-link">t</a>
+                <a href="https://www.instagram.com/saltnpepperrestaurants/" class="social-link">in</a>
+                <!-- <a href="#" class="social-link">yt</a> -->
+            </div>
+        </div>
+
+
+        <p>© 2025 Salt'n Pepper restaurant. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
